@@ -1,6 +1,81 @@
 <!DOCTYPE html>
 <header>
     <title>Leap Pearson</title>
+    <style>
+
+    html, body{
+      background-color: black;
+      color: white;
+      overflow: hidden;
+      font-family: sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+    #container{
+      position: fixed;
+      top: 100px;
+      bottom:  0;
+      left: 0;
+      right: 0;
+    }
+
+    .ribbon {
+      background-color: red;
+      position: relative;
+      top:0;
+      left:0;
+      height: 49%;
+      overflow-x:hidden;
+      overflow-y:scroll;
+    }
+
+    .title{
+      float: left;
+      background-color: green;
+      display:inline;
+      height: 100%;
+      width: 500px;
+      border: 1px solid black;
+    }
+
+    .title:nth-child(odd) {
+       background-color: yellow;
+    }
+
+    .ribbon:last-child .title{
+      background-color: purple;
+    }
+
+    .ribbon:last-child .title:nth-child(odd){
+      background-color: orange;
+    }
+
+    .location{
+      font-size: 100px;
+    }
+
+    </style>
 </header>
 <body>
+  <header class=location>London</header>
+  <div id="container">
+    <section class=ribbon>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+    </section>
+    <section class=ribbon style="margin-top:1%;">
+      <section class=title></section>
+      <section class=title></section>
+      <section class=title></section>
+    </section>
+  </div>
 </body>
