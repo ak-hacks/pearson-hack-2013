@@ -7,7 +7,7 @@
     * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
     html, body{
-      background-color: #111;
+      background-color: #161616;
       color: white;
       overflow: hidden;
       font-weight: 300;
@@ -25,7 +25,7 @@
     #container{
       position: fixed;
       top: 100px;
-      bottom:  0;
+      bottom: 35px;
       left: 0;
       right: 0;
     }
@@ -54,7 +54,9 @@
     }
 
     .title img{
+      -webkit-transform: translateZ(0);
       height: 100%;
+      box-shadow: 0px 0px 4px black;
     }
 
     .title > .label{
@@ -67,10 +69,6 @@
       text-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
 
-    /*.title:hover{
-      background-color: rgba(255, 255, 255, 0.5) !important;
-    }*/
-
     .selected-img{
       position: absolute;
       top: 0;
@@ -79,14 +77,18 @@
     }
 
     .selected-img img{
+      box-shadow: none;
       float:none;
+      width: 100%;
+      height: 100%;
     }
 
     .location{
-      font-size: 82px;
+      font-size: 72px;
       display: block;
       width:100%;
-      margin-left:30px;
+      margin-left:32px;
+      margin-top:5px;
     }
 
     #last-updated{
@@ -99,11 +101,11 @@
     #languages{
       position: fixed;
       right: 40px;
-      top: 26px;
+      top: 24px;
       color:rgba(255,255,255,0.7);
-      width:700px;
+      width:800px;
       text-align: right;
-      font-size: 1.2em;
+      font-size: 1.3em;
     }
 
     #overlay{
@@ -122,23 +124,55 @@
       top:0;right:0;left:0;bottom:0;width:100%;
     }
 
-    #overlay.off{
+    .off{
       display:none;
     }
-  
+    
+    #branding{
+      position: fixed;
+      bottom: 4px;
+      z-index: 2;
+      right: 5px;
+      font-family: sans-serif;
+      font-size:.8em;
+    }
+
+    #content{
+      background-color: rgba(0, 0, 0, 0.6);
+      border:0px solid rgba(255, 255, 255, 0.3);
+      border-left-width: 4px;
+      opacity: 1;
+      -webkit-backface-visibility: hidden;
+      padding: 0 1.4em;
+      position:absolute;
+      top:12%;
+      left: 50%;
+      right: 2%;
+      bottom:6%;
+      margin-top:10px;
+    }
+
+    #content h1, #content p{color:white;font-weight: 300;}
+    #content h1{font-size: 3em;margin:.2em 0;}
+    #content {font-size: 1.2em;}
 
     </style>
 </header>
 
 <body>
   <header class=location>London</header>
-  <div id="languages">العربية • 中文 • <span style="color:pink;text-shadow: 0 0 2px black;">English</span> • français • Ελληνικά • עברית • italiano • 한국어 • Pyccĸий</div>
+  <div id="languages">العربية • 中文 • <span style="color:rgb(70,185,234);text-shadow: 0 0 2px black;">English</span> • français • Ελληνικά • עברית • italiano • 한국어 • Pyccĸий</div>
   <div id="last-updated">Last updated 20 mins ago</div>
+  <div id="branding">Pearson Live Cities</div>
   <div id="container">
     <section id="ribbon-0" class=ribbon>
-        <span class=title><span class=label>UK News</span><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTQKQHouMRBUW578QiIlfMCngibiopmwtA9qc265S9eIBRezryzYw" /></span>
-        <span class=title><span class=label>What's On</span><img src="http://www.richardbollphotography.com/London-photographer.jpg" /></span>
-        <span class=title><span class=label>Travel Guide</span><img src="http://www.timhodges.co.uk/Training/London.jpg" /></span>
+
+        <!-- tile0 is a reference to an object in the articleData object/JSON -->
+        <span  data-id="tile0" class=title><span class=label>UK News</span><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTQKQHouMRBUW578QiIlfMCngibiopmwtA9qc265S9eIBRezryzYw" /></span>
+        
+        <span data-id="tile1" class=title><span class=label>What's On</span><img src="http://www.richardbollphotography.com/London-photographer.jpg" /></span>
+        
+        <span data-id="tile2" class=title><span class=label>Travel Guide</span><img src="http://www.timhodges.co.uk/Training/London.jpg" /></span>
         <span class=title><img src="http://www.dalziel-pow.com/uploads/journal/London_photos_Main3.jpg" /></span>
         <span class=title><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEYUIJHIZaeVqoDEkHDypijRQ495EDeD7UxxRPSMz8Y4gpCPIr" /></span>
         <span class=title><img src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" /></span>
@@ -155,6 +189,11 @@
 
   <div id="overlay" class="off">
     <div class="bg"></div>
+    <div id="content">
+      <h1 id="article-headline">Article Title</h1>
+      <div  id="article-body"></div>
+    </div>
+  
   </div>
 
   <script src="js/pusher.min.js"></script>
@@ -162,46 +201,99 @@
   <script src="js/UserInterface.js"></script>
   <script src="js/sockets.js"></script>
   <script>
-    // $(function() {
-    //   setTimeout(function() {
-    //       document.getElementById('ribbon-0').style.left = '-50%';
-    //   }, 3000);
-    //   setTimeout(function() {
-    //       document.getElementById('ribbon-1').style.left = '25%';
-    //   }, 4000);
-
-    // });
 
     var $overlay = $('#overlay'),
         origin;
+    
+    $('#content').hide();
+    $overlay.hide();
 
-    $overlay.on('click', function() {
-      $overlay.find('.selected-img').css({left:origin.left, top:origin.top, height: origin.height, 'margin-top' : '0px'});
+    // on close
+    $overlay.on('click', function onClose() {
       setTimeout(function(){
-        $('#container').css('-webkit-filter', 'none');
-        $overlay.fadeOut('fast').find('.selected-img').remove();
-      }, 700);
-      origin = null;
-    })
+        $overlay.find('.selected-img').css({left:origin.left, top:origin.top, height: origin.height, width: origin.width});
+        origin = null;
+      }, 200);
+      $('#content').fadeOut('fast');
+      setTimeout(function(){
 
-    $('#container').on('click', '.title', function() {
+        // remove the blur filter
+        $('#container').css('-webkit-filter', 'none');
+
+        $overlay.fadeOut('fast').find('.selected-img').remove();
+      }, 850);
+    });
+
+
+    // on open
+    $('#container').on('click', '.title', function onOpen() {
+
       var $el = $(this),
-          clone = $el.clone();
-          console.log(this, $el);
+          clone = $el.clone(),
+          id = $el.data('id'),
+          article = articleData[id];
+
       var pos = $el.offset();
 
+      // store info about when the tile belongs so it can be replaced onclose
       origin = {
         left: pos.left,
         top: pos.top,
-        height: $el.outerHeight()
+        height: $el.outerHeight(),
+        width: $el.outerWidth()
       };
 
-      clone.addClass('selected-img').css({left:origin.left, top:origin.top, height: origin.height});
-      $overlay.show().removeClass('off');
+
+      // make the clone appear in the same place as the origin tile
+      clone.addClass('selected-img').css({left:origin.left, top:origin.top, height: origin.height, width: origin.width});
+      
+      $overlay.show();
+      
+      // apply the blur filter
+      $('#container').css('-webkit-filter', 'blur(12px)');
+      
+      console.log('Aspect ratio', origin.height / origin.width);
+      console.log('Available space', $overlay.height());
+
+      var availableWidth = ($overlay.width() / 2);
+      var availableHeight = $overlay.height();
+
+      var target = {
+        top:'12%',
+        left: '0%',
+        width: availableWidth + 'px',
+        height: (((origin.width / origin.height) * $overlay.width()) / 2) + 'px'
+      };
+      
       clone.appendTo($overlay[0]);
-      setTimeout( function() { clone.css({height: '800px', top: '50%', left: '30px', 'margin-top' : '-400px'}); }, 0);
-      $('#container').css('-webkit-filter', 'blur(5px)');
-      console.log(pos, clone);
+
+      // animate the cloned image to its new position in the detail view.
+      setTimeout( function() { clone.css({height: target.height, width: target.width, top: target.top, left: target.left}); }, 10);
+
+      // set up a short wait to display the article detail view
+      setTimeout(function(){
+        $('#content').fadeIn('fast');
+      }, 500);
+
+      // populate the detail view with the article data
+      $('#article-headline').text(article.header);
+      $('#article-body').html('<p>' + article.body.join('</p><p>')+ '</p>');
     });
+
+    // Dummy data for each article
+    var articleData = {
+      tile0: {
+        header: 'Some Head',
+        body: ['para1', 'para2']
+      },
+      tile1: {
+        header: 'tile 2',
+        body: ['para1', 'para2']
+      },
+      tile2: {
+        header: 'title 2',
+        body: ['para1', 'para2']
+      }
+    };
   </script>
 </body>
