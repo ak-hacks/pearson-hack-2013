@@ -71,6 +71,14 @@
       background-color: transparent;
     }
 
+    .selected-img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-transition:all .5s 0 ease-in-out;
+      -webkit-filter: none;
+    }
+
     .location{
       font-size: 82px;
       display: block;
@@ -84,6 +92,22 @@
       top: 45px;
       opacity: 0.5;
     }
+
+    #overlay{
+      background-color: rgba(0, 0, 0, 0.5);
+      /*-webkit-filter: blur(5px);*/
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width:100%;
+      z-index: 2;
+    }
+
+    #overlay.off{
+      width:0;
+    }
+
 
     </style>
 </header>
@@ -109,15 +133,56 @@
         <img class=title src="http://www.lousmith.co.uk/wp-content/uploads/galleries/post-59/full/c69-London-Photography-Biker-Grafitti-Lou-Smith-0230.jpg" />
     </section>
   </div>
-  <script src="http://code.jquery.com/jquery-1.10.0.js"></script>
+
+  <div id="overlay" class="off">
+
+  </div>
+
+  <script src="js/pusher.min.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/sockets.js"></script>
+  <script src="js/UserInterface.js"></script>
   <script>
-    $(function() {
-      setTimeout(function() {
-          document.getElementById('ribbon-1').style.left = '-50%';
-      }, 3000);
-      setTimeout(function() {
-          document.getElementById('ribbon-2').style.left = '25%';
-      }, 4000);
+    // $(function() {
+    //   setTimeout(function() {
+    //       document.getElementById('ribbon-1').style.left = '-50%';
+    //   }, 3000);
+    //   setTimeout(function() {
+    //       document.getElementById('ribbon-2').style.left = '25%';
+    //   }, 4000);
+
+    // });
+
+    var $overlay = $('#overlay'),
+        origin;
+
+    $overlay.on('click', '.title', function() {
+      $overlay.find('.selected-img').css({left:origin.left, top:origin.top, height: origin.height});
+      setTimeout(function(){
+        $overlay.empty();
+      $overlay.addClass('off');
+      }, 1000);
+      origin = null;
+    })
+
+    $('#container').on('click', '.title', function() {
+
+      var $el = $(this),
+          clone = $el.clone();
+          console.log(this, $el);
+      var pos = $el.offset();
+      
+      origin = {
+        left: pos.left,
+        top: pos.top,
+        height: $el.outerHeight()
+      };
+
+      clone.addClass('selected-img').css({left:origin.left, top:origin.top, height: origin.height});
+      $overlay.removeClass('off');
+      clone.appendTo($overlay[0]);
+      setTimeout( function() { clone.css({height: '800px', top: '20px', left: '30px'}); }, 0);
+      console.log(pos, clone);
     });
   </script>
 </body>
