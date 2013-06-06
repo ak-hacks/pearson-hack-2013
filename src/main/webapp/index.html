@@ -7,7 +7,7 @@
     * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
     html, body{
-      background-color: black;
+      background-color: #111;
       color: white;
       overflow: hidden;
       font-weight: 300;
@@ -50,6 +50,21 @@
       border: 0 none;
       padding:10px 15px 10px 15px;
       cursor: pointer;
+      position: relative;
+    }
+
+    .title img{
+      height: 100%;
+    }
+
+    .title > .label{
+      z-index: 10;
+      position: absolute;
+      left:27px;
+      bottom:22px;
+      font-size: 1.9em;
+      color:rgba(255,255,255,0.6);
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
 
     /*.title:hover{
@@ -60,7 +75,11 @@
       position: absolute;
       top: 0;
       left: 0;
-      -webkit-transition:all .5s 0 ease-in-out;
+      -webkit-transition:all .4s 0 ease-in-out;
+    }
+
+    .selected-img img{
+      float:none;
     }
 
     .location{
@@ -73,8 +92,18 @@
     #last-updated{
       position: fixed;
       right: 40px;
-      top: 45px;
+      top: 67px;
       opacity: 0.5;
+    }
+
+    #languages{
+      position: fixed;
+      right: 40px;
+      top: 26px;
+      color:rgba(255,255,255,0.7);
+      width:700px;
+      text-align: right;
+      font-size: 1.2em;
     }
 
     #overlay{
@@ -96,30 +125,31 @@
     #overlay.off{
       display:none;
     }
-
+  
 
     </style>
 </header>
 
 <body>
   <header class=location>London</header>
+  <div id="languages">العربية • 中文 • <span style="color:pink;text-shadow: 0 0 2px black;">English</span> • français • Ελληνικά • עברית • italiano • 한국어 • Pyccĸий</div>
   <div id="last-updated">Last updated 20 mins ago</div>
   <div id="container">
     <section id="ribbon-0" class=ribbon>
-        <img class=title src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTQKQHouMRBUW578QiIlfMCngibiopmwtA9qc265S9eIBRezryzYw" />
-        <img class=title src="http://www.richardbollphotography.com/London-photographer.jpg" />
-        <img class=title src="http://www.timhodges.co.uk/Training/London.jpg" />
-        <img class=title src="http://www.dalziel-pow.com/uploads/journal/London_photos_Main3.jpg" />
-        <img class=title src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEYUIJHIZaeVqoDEkHDypijRQ495EDeD7UxxRPSMz8Y4gpCPIr" />
-        <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
-        <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
-        <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
+        <span class=title><span class=label>UK News</span><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTQKQHouMRBUW578QiIlfMCngibiopmwtA9qc265S9eIBRezryzYw" /></span>
+        <span class=title><span class=label>What's On</span><img src="http://www.richardbollphotography.com/London-photographer.jpg" /></span>
+        <span class=title><span class=label>Travel Guide</span><img src="http://www.timhodges.co.uk/Training/London.jpg" /></span>
+        <span class=title><img src="http://www.dalziel-pow.com/uploads/journal/London_photos_Main3.jpg" /></span>
+        <span class=title><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEYUIJHIZaeVqoDEkHDypijRQ495EDeD7UxxRPSMz8Y4gpCPIr" /></span>
+        <span class=title><img src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" /></span>
+        <span class=title><img src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" /></span>
+        <span class=title><img src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" /></span>
     </section>
     <section id="ribbon-1" class=ribbon style=top:50%>
-        <img class=title src="http://www.iesphotography.co.uk/media/img/gallery/travel/london/london_web2.jpg" />
-        <img class=title src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTVfiyDJYT25sVSxx_LmctR9nEcAWBH-D7fOO-32FTpxEFnFXBf" />
-        <img class=title src="http://1-ps.googleusercontent.com/x/www.stuckincustoms.com/stuckincustoms.smugmug.com/Portfolio-The-Best/your-favorites/i-2pNBtD6/0/900x694/900x694xTrey,P20Ratcliff,P20-,P20London,P20Pole-900x694.jpg.pagespeed.ic.gO_57oorxm.jpg" />
-        <img class=title src="http://www.lousmith.co.uk/wp-content/uploads/galleries/post-59/full/c69-London-Photography-Biker-Grafitti-Lou-Smith-0230.jpg" />
+        <span class=title><span class=label>Night Tours</span><img src="http://www.iesphotography.co.uk/media/img/gallery/travel/london/london_web2.jpg" /></span>
+        <span class=title><span class=label>Photography</span><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTVfiyDJYT25sVSxx_LmctR9nEcAWBH-D7fOO-32FTpxEFnFXBf" /></span>
+        <span class=title><span class=label>Label</span><img src="http://1-ps.googleusercontent.com/x/www.stuckincustoms.com/stuckincustoms.smugmug.com/Portfolio-The-Best/your-favorites/i-2pNBtD6/0/900x694/900x694xTrey,P20Ratcliff,P20-,P20London,P20Pole-900x694.jpg.pagespeed.ic.gO_57oorxm.jpg" /></span>
+        <span class=title><span class=label>Label</span><img  src="http://www.lousmith.co.uk/wp-content/uploads/galleries/post-59/full/c69-London-Photography-Biker-Grafitti-Lou-Smith-0230.jpg" /></span>
     </section>
   </div>
 
@@ -145,8 +175,8 @@
     var $overlay = $('#overlay'),
         origin;
 
-    $overlay.on('click', '.title', function() {
-      $overlay.find('.selected-img').css({left:origin.left, top:origin.top, height: origin.height});
+    $overlay.on('click', function() {
+      $overlay.find('.selected-img').css({left:origin.left, top:origin.top, height: origin.height, 'margin-top' : '0px'});
       setTimeout(function(){
         $('#container').css('-webkit-filter', 'none');
         $overlay.fadeOut('fast').find('.selected-img').remove();
@@ -155,7 +185,6 @@
     })
 
     $('#container').on('click', '.title', function() {
-      $('#container').css('-webkit-filter', 'blur(5px)');
       var $el = $(this),
           clone = $el.clone();
           console.log(this, $el);
@@ -170,7 +199,8 @@
       clone.addClass('selected-img').css({left:origin.left, top:origin.top, height: origin.height});
       $overlay.show().removeClass('off');
       clone.appendTo($overlay[0]);
-      setTimeout( function() { clone.css({height: '800px', top: '20px', left: '30px'}); }, 0);
+      setTimeout( function() { clone.css({height: '800px', top: '50%', left: '30px', 'margin-top' : '-400px'}); }, 0);
+      $('#container').css('-webkit-filter', 'blur(5px)');
       console.log(pos, clone);
     });
   </script>
