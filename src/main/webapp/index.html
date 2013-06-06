@@ -1,16 +1,7 @@
 <!DOCTYPE html>
 <header>
     <title>Leap Pearson</title>
-    <script>
-      window.onload = function() {
-        setTimeout(function() {
-            document.getElementById('ribbon-1').style.left = '-50%';
-        }, 3000);
-        setTimeout(function() {
-            document.getElementById('ribbon-2').style.left = '25%';
-        }, 4000);
-      }
-    </script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700' rel='stylesheet' type='text/css'>
     <style>
 
     * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
@@ -19,7 +10,8 @@
       background-color: black;
       color: white;
       overflow: hidden;
-      font-family: sans-serif;
+      font-weight: 300;
+      font-family: 'Roboto Slab' sans-serif;
       padding: 0;
       margin: 0;
     }
@@ -63,10 +55,6 @@
       cursor: pointer;
     }
 
-    .title img{
-      height: 100%;
-    }
-
     .title:hover{
       background-color: rgba(255, 255, 255, 0.5) !important;
     }
@@ -84,7 +72,17 @@
     }
 
     .location{
-      font-size: 100px;
+      font-size: 82px;
+      display: block;
+      width:100%;
+      margin-left:30px;
+    }
+
+    #last-updated{
+      position: fixed;
+      right: 40px;
+      top: 45px;
+      opacity: 0.5;
     }
 
     </style>
@@ -92,6 +90,7 @@
 
 <body>
   <header class=location>London</header>
+  <div id="last-updated">Last updated 20 mins ago</div>
   <div id="container">
     <section id="ribbon-1" class=ribbon>
         <img class=title src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTQKQHouMRBUW578QiIlfMCngibiopmwtA9qc265S9eIBRezryzYw" />
@@ -108,9 +107,17 @@
         <img class=title src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTVfiyDJYT25sVSxx_LmctR9nEcAWBH-D7fOO-32FTpxEFnFXBf" />
         <img class=title src="http://1-ps.googleusercontent.com/x/www.stuckincustoms.com/stuckincustoms.smugmug.com/Portfolio-The-Best/your-favorites/i-2pNBtD6/0/900x694/900x694xTrey,P20Ratcliff,P20-,P20London,P20Pole-900x694.jpg.pagespeed.ic.gO_57oorxm.jpg" />
         <img class=title src="http://www.lousmith.co.uk/wp-content/uploads/galleries/post-59/full/c69-London-Photography-Biker-Grafitti-Lou-Smith-0230.jpg" />
-      
-      <section class=title></section>
-      <section class=title></section>
     </section>
   </div>
+  <script src="http://code.jquery.com/jquery-1.10.0.js"></script>
+  <script>
+    $(function() {
+      setTimeout(function() {
+          document.getElementById('ribbon-1').style.left = '-50%';
+      }, 3000);
+      setTimeout(function() {
+          document.getElementById('ribbon-2').style.left = '25%';
+      }, 4000);
+    });
+  </script>
 </body>
