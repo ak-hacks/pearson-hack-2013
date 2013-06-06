@@ -12,3 +12,9 @@ target/
 *.jar
 *.war
 *.ear
+
+# FE stuff #
+node_modules
+
+# Misc. #
+.DS_Store
