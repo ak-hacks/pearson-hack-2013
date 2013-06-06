@@ -1,4 +1,12 @@
+# IDE settings
+.idea/
+*.iml
+*.settings
+*.project
+*.classpath
+
 *.class
+target/
 
 # Package Files #
 *.jar
