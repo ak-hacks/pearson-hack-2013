@@ -1,8 +1,8 @@
 var testData = {};
 
 testData.hover1 = {
-    "xpos": 344,
-    "ypos": 544
+    "xpos": 544,
+    "ypos": 200
 }
 testData.hover2 = {
     "xpos": -127,
