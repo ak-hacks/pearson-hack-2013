@@ -5,7 +5,7 @@ var UserInterface = function () {
         xposition = 0,
         yposition = 0,
         halfWindowWidth = Math.floor($(window).width() / 2 ),
-        halfWindowHeight = Math.floor($(window).height() / 2);
+        winHeight = Math.floor($(window).height());
 
     $('body').append('<img src="/img/blob.png" alt="location indicator" id="marker-blob">');
 
@@ -20,16 +20,13 @@ var UserInterface = function () {
     function hover(xpos, ypos) {
         xposition = xpos;
         yposition = ypos;
-        updatePage();
+        updateBlob();
     }
 
-    function updatePage() {
+    function updateBlob() {
         var newX = halfWindowWidth + xposition,
-            newY = halfWindowHeight + yposition;
-        $("#marker-blob").animate({
-            left: newX,
-            top: newY
-        }, animationDelay);
+            newY = winHeight - yposition;
+        $('#marker-blob').css({left: newX, top: newY});
     }
 
     return {

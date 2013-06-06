@@ -16,6 +16,12 @@
       margin: 0;
     }
 
+    #marker-blob{
+      transition: left 0.3s 0 ease-in-out;
+      position: fixed;
+      z-index: 3;
+    }
+
     #container{
       position: fixed;
       top: 100px;
@@ -25,11 +31,11 @@
     }
 
     #ribbon-1 {
-      
+
     }
 
     #ribbon-2 {
-      
+
     }
 
     .ribbon {
@@ -140,8 +146,9 @@
 
   <script src="js/pusher.min.js"></script>
   <script src="js/jquery.js"></script>
-  <script src="js/sockets.js"></script>
+
   <script src="js/UserInterface.js"></script>
+  <script src="js/sockets.js"></script>
   <script>
     // $(function() {
     //   setTimeout(function() {
@@ -171,7 +178,7 @@
           clone = $el.clone();
           console.log(this, $el);
       var pos = $el.offset();
-      
+
       origin = {
         left: pos.left,
         top: pos.top,
