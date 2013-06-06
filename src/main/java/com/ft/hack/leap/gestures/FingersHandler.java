@@ -12,22 +12,21 @@ import java.util.List;
 
 public class FingersHandler {
 
-    public static final Logger LOGGER = Logger.getLogger(FingersHandler.class);
-    private static final float MOVEMENT_THRESHOLD = 20;
-    private static float x = -999;
-    private static float y = -999;
-
-    private PusherClient pusherClient = new PusherClient();
+    private static final Logger LOGGER = Logger.getLogger(FingersHandler.class);
+    private static final String HOVER_EVENT = "hover";
+    private static final int MOVEMENT_THRESHOLD = 20;
+    private static int x = -999;
+    private static int y = -999;
 
     public void handleEvent(Object eventData) {
 
-        List<List<Float>> fingersList = (List<List<Float>>) eventData;
+        List<List<Integer>> fingersList = (List<List<Integer>>) eventData;
 
         // Only one finger supported at the moment
         if(fingersList.size() > 0) {
-            List<Float> fingerCoordinates = fingersList.get(0);
-            float x = fingerCoordinates.get(0);
-            float y = fingerCoordinates.get(1);
+            List<Integer> fingerCoordinates = fingersList.get(0);
+            int x = fingerCoordinates.get(0);
+            int y = fingerCoordinates.get(1);
 
             boolean pushData = false;
 
@@ -52,7 +51,7 @@ public class FingersHandler {
             }
 
             if (pushData) {
-                pusherClient.push(fingerCoordinates);
+                PusherClient.push(fingerCoordinates, HOVER_EVENT);
             }
         }
     }

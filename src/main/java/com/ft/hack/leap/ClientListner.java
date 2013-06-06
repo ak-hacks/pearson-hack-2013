@@ -1,12 +1,15 @@
 package com.ft.hack.leap;
 
+import com.ft.hack.leap.gestures.CircleHandler;
 import com.ft.hack.leap.gestures.FingersHandler;
 import com.ft.hack.leap.gestures.SwipeHandler;
 import com.leapmotion.leap.*;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: anuragkapur
@@ -54,18 +57,19 @@ public class ClientListner extends Listener {
             FingerList fingers = hand.fingers();
             if (!fingers.empty()) {
 
-                List<List<Float>> fingersList = new ArrayList<List<Float>>();
+                List<List<Integer>> fingersList = new ArrayList<List<Integer>>();
 
                 for (Finger finger : fingers) {
                     Vector fingerTip = finger.tipPosition();
-                    float x = fingerTip.getX();
-                    float y = fingerTip.getY();
-                    float z = fingerTip.getZ();
+                    int x = (int)fingerTip.getX();
+                    int y = (int)fingerTip.getY();
+                    int z = (int)fingerTip.getZ();
 
-                    List<Float> fingerCoordinates = new ArrayList<Float>();
-                    fingerCoordinates.add(Float.valueOf(x));
-                    fingerCoordinates.add(Float.valueOf(y));
-                    fingerCoordinates.add(Float.valueOf(z));
+                    List<Integer> fingerCoordinates = new ArrayList<Integer>();
+                    fingerCoordinates.add(Integer.valueOf(x));
+                    fingerCoordinates.add(Integer.valueOf(y));
+                    // Dont need y coordinates for now
+                    //fingerCoordinates.add(Integer.valueOf(z));
 
                     fingersList.add(fingerCoordinates);
                     LOGGER.debug("Finger tip :: " + fingerTip);
@@ -100,13 +104,24 @@ public class ClientListner extends Listener {
                         CircleGesture previousUpdate = new CircleGesture(controller.frame(1).gesture(circle.id()));
                         sweptAngle = (circle.progress() - previousUpdate.progress()) * 2 * Math.PI;
                     }
+                    int x = (int)circle.pointable().tipPosition().getX();
+                    int y = (int)circle.pointable().tipPosition().getY();
 
-                    LOGGER.debug("Circle id: " + circle.id()
+                    LOGGER.info("Circle id: " + circle.id()
                             + ", " + circle.state()
                             + ", progress: " + circle.progress()
                             + ", radius: " + circle.radius()
                             + ", angle: " + Math.toDegrees(sweptAngle)
                             + ", " + clockwiseness);
+
+                    if(circle.state().name().equalsIgnoreCase("STATE_STOP")) {
+                        CircleHandler circleHandler = new CircleHandler();
+                        Map<String, String> circleData = new HashMap<String, String>();
+                        circleData.put("direction", clockwiseness);
+                        circleData.put("x",""+x);
+                        circleData.put("y",""+y);
+                        circleHandler.handleEvent(circleData);
+                    }
                     break;
                 case TYPE_SWIPE:
                     SwipeGesture swipe = new SwipeGesture(gesture);

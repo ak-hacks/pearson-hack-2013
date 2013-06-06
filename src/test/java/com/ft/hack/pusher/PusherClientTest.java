@@ -16,11 +16,10 @@ public class PusherClientTest {
     public void testPush() throws Exception {
         PusherClient pusherClient = new PusherClient();
 
-        List<Float> data = new ArrayList<Float>();
-        data.add(Float.valueOf(1));
-        data.add(Float.valueOf(2));
-        data.add(Float.valueOf(3));
+        List<Integer> data = new ArrayList<Integer>();
+        data.add(Integer.valueOf(1));
+        data.add(Integer.valueOf(2));
 
-        pusherClient.push(data);
+        pusherClient.push(data,"hover");
     }
 }
