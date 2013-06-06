@@ -24,14 +24,6 @@
       right: 0;
     }
 
-    #ribbon-1 {
-      
-    }
-
-    #ribbon-2 {
-      
-    }
-
     .ribbon {
       background-color: transparent;
       position: absolute;
@@ -46,7 +38,6 @@
 
     .title{
       float: left;
-      background-color: transparent;
       display:inline-block;
       height: 100%;
       min-width: 100px;
@@ -55,28 +46,15 @@
       cursor: pointer;
     }
 
-    .title:hover{
+    /*.title:hover{
       background-color: rgba(255, 255, 255, 0.5) !important;
-    }
-
-    .title:nth-child(odd) {
-       background-color: transparent;
-    }
-
-    .ribbon:last-child .title{
-      background-color: transparent;
-    }
-
-    .ribbon:last-child .title:nth-child(odd) {
-      background-color: transparent;
-    }
+    }*/
 
     .selected-img{
       position: absolute;
       top: 0;
       left: 0;
       -webkit-transition:all .5s 0 ease-in-out;
-      -webkit-filter: none;
     }
 
     .location{
@@ -94,18 +72,23 @@
     }
 
     #overlay{
-      background-color: rgba(0, 0, 0, 0.5);
-      /*-webkit-filter: blur(5px);*/
       position: fixed;
       top: 0;
       left: 0;
       bottom: 0;
       width:100%;
       z-index: 2;
+      transition:opacity 0.5 0 linear;
+    }
+
+    #overlay .bg{
+      position:absolute;
+      background-color:rgba(0, 0, 0, 0.5);
+      top:0;right:0;left:0;bottom:0;width:100%;
     }
 
     #overlay.off{
-      width:0;
+      display:none;
     }
 
 
@@ -116,7 +99,7 @@
   <header class=location>London</header>
   <div id="last-updated">Last updated 20 mins ago</div>
   <div id="container">
-    <section id="ribbon-1" class=ribbon>
+    <section id="ribbon-0" class=ribbon>
         <img class=title src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTQKQHouMRBUW578QiIlfMCngibiopmwtA9qc265S9eIBRezryzYw" />
         <img class=title src="http://www.richardbollphotography.com/London-photographer.jpg" />
         <img class=title src="http://www.timhodges.co.uk/Training/London.jpg" />
@@ -126,7 +109,7 @@
         <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
         <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
     </section>
-    <section id="ribbon-2" class=ribbon style=top:50%>
+    <section id="ribbon-1" class=ribbon style=top:50%>
         <img class=title src="http://www.iesphotography.co.uk/media/img/gallery/travel/london/london_web2.jpg" />
         <img class=title src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTVfiyDJYT25sVSxx_LmctR9nEcAWBH-D7fOO-32FTpxEFnFXBf" />
         <img class=title src="http://1-ps.googleusercontent.com/x/www.stuckincustoms.com/stuckincustoms.smugmug.com/Portfolio-The-Best/your-favorites/i-2pNBtD6/0/900x694/900x694xTrey,P20Ratcliff,P20-,P20London,P20Pole-900x694.jpg.pagespeed.ic.gO_57oorxm.jpg" />
@@ -135,20 +118,20 @@
   </div>
 
   <div id="overlay" class="off">
-
+    <div class="bg"></div>
   </div>
 
   <script src="js/pusher.min.js"></script>
   <script src="js/jquery.js"></script>
-  <script src="js/sockets.js"></script>
   <script src="js/UserInterface.js"></script>
+  <script src="js/sockets.js"></script>
   <script>
     // $(function() {
     //   setTimeout(function() {
-    //       document.getElementById('ribbon-1').style.left = '-50%';
+    //       document.getElementById('ribbon-0').style.left = '-50%';
     //   }, 3000);
     //   setTimeout(function() {
-    //       document.getElementById('ribbon-2').style.left = '25%';
+    //       document.getElementById('ribbon-1').style.left = '25%';
     //   }, 4000);
 
     // });
@@ -159,14 +142,14 @@
     $overlay.on('click', '.title', function() {
       $overlay.find('.selected-img').css({left:origin.left, top:origin.top, height: origin.height});
       setTimeout(function(){
-        $overlay.empty();
-      $overlay.addClass('off');
-      }, 1000);
+        $('#container').css('-webkit-filter', 'none');
+        $overlay.fadeOut('fast').find('.selected-img').remove();
+      }, 700);
       origin = null;
     })
 
     $('#container').on('click', '.title', function() {
-
+      $('#container').css('-webkit-filter', 'blur(5px)');
       var $el = $(this),
           clone = $el.clone();
           console.log(this, $el);
@@ -179,7 +162,7 @@
       };
 
       clone.addClass('selected-img').css({left:origin.left, top:origin.top, height: origin.height});
-      $overlay.removeClass('off');
+      $overlay.show().removeClass('off');
       clone.appendTo($overlay[0]);
       setTimeout( function() { clone.css({height: '800px', top: '20px', left: '30px'}); }, 0);
       console.log(pos, clone);
