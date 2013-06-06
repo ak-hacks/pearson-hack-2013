@@ -10,11 +10,27 @@ var UserInterface = function () {
     $('body').append('<img src="/img/blob.png" alt="location indicator" id="marker-blob">');
 
     function swipe(segment, direction) {
+        var section = $("ribbon-" + segment),
+            segPosition = section.position(),
+            newPosition;
+        if (direction === 'left') {
+            //need to put in check for whether there's additional content to the right
+            newPosition = segPosition.left - halfWindowWidth;
+            if (section.width() > newPosition) {
+                $(section).css('left', newPosition);
+            }
+        } else {
+            newPosition = segPosition.left + halfWindowWidth;
+            if (newPosition > 0) {
+                $(section).css('left', newPosition);
+            }
 
+        }
     }
 
-    function select(data) {
-
+    function select(xpos, ypos) {
+        var elem = document.elementByPoint(xpos, ypos);
+        elem.click();
     }
 
     function hover(xpos, ypos) {

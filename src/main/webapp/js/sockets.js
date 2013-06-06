@@ -15,8 +15,8 @@ channel.bind('swipe', function(data) {
 });
 
 channel.bind('select', function(data) {
-    console.log('click received', data);
-    ui.select(data);
+    console.log('select received', data);
+    ui.select(data[0], data[1]);
 });
 
 channel.bind('hover', function(data) {
