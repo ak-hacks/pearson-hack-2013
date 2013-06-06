@@ -7,7 +7,7 @@ Pusher.log = function(message) {
 var pusher = new Pusher('f17a457dad3779afdba1');
 var channel = pusher.subscribe('leap_pearson');
 
-var ui = new UserInterface();
+var ui = new UserInterface(200, 3);
 
 channel.bind('swipe', function(data) {
     console.log('swipe received', data);
