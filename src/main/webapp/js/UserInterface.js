@@ -4,7 +4,7 @@ var UserInterface = function () {
     var xposition = 0,
         yposition = 0;
 
-    $('body').append('<img src="/img/blob.png" alt="location indicator">');
+    $('body').append('<img src="/img/blob.png" alt="location indicator" id="marker-blob">');
 
     function swipe(direction) {
 
