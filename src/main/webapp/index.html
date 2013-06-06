@@ -13,6 +13,8 @@
     </script>
     <style>
 
+    * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
     html, body{
       background-color: black;
       color: white;
@@ -34,8 +36,12 @@
       
     }
 
+    #ribbon-2 {
+      
+    }
+
     .ribbon {
-      background-color: red;
+      background-color: transparent;
       position: absolute;
       top:0;
       left:0;
@@ -48,27 +54,33 @@
 
     .title{
       float: left;
-      background-color: green;
+      background-color: transparent;
       display:inline-block;
       height: 100%;
-      width: 500px;
-      border: 1px solid black;
+      min-width: 100px;
+      border: 0 none;
+      padding:10px 15px 10px 15px;
+      cursor: pointer;
+    }
+
+    .title img{
+      height: 100%;
     }
 
     .title:hover{
-      
+      background-color: rgba(255, 255, 255, 0.5) !important;
     }
 
     .title:nth-child(odd) {
-       background-color: yellow;
+       background-color: transparent;
     }
 
     .ribbon:last-child .title{
-      background-color: purple;
+      background-color: transparent;
     }
 
     .ribbon:last-child .title:nth-child(odd) {
-      background-color: orange;
+      background-color: transparent;
     }
 
     .location{
@@ -82,19 +94,21 @@
   <header class=location>London</header>
   <div id="container">
     <section id="ribbon-1" class=ribbon>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
-      <section class=title></section>
+        <img class=title src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTQKQHouMRBUW578QiIlfMCngibiopmwtA9qc265S9eIBRezryzYw" />
+        <img class=title src="http://www.richardbollphotography.com/London-photographer.jpg" />
+        <img class=title src="http://www.timhodges.co.uk/Training/London.jpg" />
+        <img class=title src="http://www.dalziel-pow.com/uploads/journal/London_photos_Main3.jpg" />
+        <img class=title src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEYUIJHIZaeVqoDEkHDypijRQ495EDeD7UxxRPSMz8Y4gpCPIr" />
+        <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
+        <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
+        <img class=title src="http://ecx.images-amazon.com/images/I/51ZeftO-ujL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_SX385_SY500_CR,0,0,385,500_SH20_OU02_.jpg" />
     </section>
     <section id="ribbon-2" class=ribbon style=top:50%>
-      <section class=title></section>
+        <img class=title src="http://www.iesphotography.co.uk/media/img/gallery/travel/london/london_web2.jpg" />
+        <img class=title src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTVfiyDJYT25sVSxx_LmctR9nEcAWBH-D7fOO-32FTpxEFnFXBf" />
+        <img class=title src="http://1-ps.googleusercontent.com/x/www.stuckincustoms.com/stuckincustoms.smugmug.com/Portfolio-The-Best/your-favorites/i-2pNBtD6/0/900x694/900x694xTrey,P20Ratcliff,P20-,P20London,P20Pole-900x694.jpg.pagespeed.ic.gO_57oorxm.jpg" />
+        <img class=title src="http://www.lousmith.co.uk/wp-content/uploads/galleries/post-59/full/c69-London-Photography-Biker-Grafitti-Lou-Smith-0230.jpg" />
+      
       <section class=title></section>
       <section class=title></section>
     </section>
