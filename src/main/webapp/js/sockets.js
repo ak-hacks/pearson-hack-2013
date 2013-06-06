@@ -5,18 +5,21 @@ Pusher.log = function(message) {
 };
 
 var pusher = new Pusher('f17a457dad3779afdba1');
-var channel = pusher.subscribe('test_channel');
+var channel = pusher.subscribe('leap_pearson');
+
+var ui = new UserInterface();
+
 channel.bind('swipe', function(data) {
     console.log('swipe received', data);
-    UserInterface.swipe(data.segment, data.direction);
+    ui.swipe(data.segment, data.direction);
 });
 
-channel.bind('click', function(data) {
+channel.bind('select', function(data) {
     console.log('click received', data);
-    UserInterface.click(data);
+    ui.select(data);
 });
 
 channel.bind('hover', function(data) {
     console.log('hover received', data);
-    UserInterface.hover(data.xposition, data.yposition);
+    ui.hover(data[0], data[1]);
 });

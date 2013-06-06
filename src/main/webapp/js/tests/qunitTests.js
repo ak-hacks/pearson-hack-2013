@@ -10,10 +10,10 @@ asyncTest( "hello test", function() {
     setTimeout(function() {
         //have to wait for animation to complete
         equal($('#marker-blob').css('left') , (Math.floor($(window).width() / 2 ) + testData.hover1.xpos) + 'px', "x pos is 344");
-        equal($('#marker-blob').css('top'), (Math.floor($(window).height() / 2 ) + testData.hover1.ypos) + 'px', "y pos is 544");
+        equal($('#marker-blob').css('top'), (Math.floor($(window).height()) - testData.hover1.ypos) + 'px', "y pos is 544");
 
         start();
-    }, 1000);
+    }, 20);
 
 
 });
