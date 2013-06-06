@@ -25,7 +25,7 @@
     #container{
       position: fixed;
       top: 100px;
-      bottom: 35px;
+      bottom: 25px;
       left: 0;
       right: 0;
     }
@@ -81,6 +81,10 @@
       float:none;
       width: 100%;
       height: 100%;
+    }
+
+    .selected-img .label{
+      color:white;
     }
 
     .location{
@@ -145,7 +149,6 @@
       -webkit-backface-visibility: hidden;
       padding: 0 1.4em;
       position:absolute;
-      top:12%;
       left: 50%;
       right: 2%;
       bottom:6%;
@@ -153,7 +156,7 @@
     }
 
     #content h1, #content p{color:white;font-weight: 300;}
-    #content h1{font-size: 3em;margin:.2em 0;}
+    #content h1{font-size: 2.6em;margin:.2em 0;}
     #content {font-size: 1.2em;}
 
     </style>
@@ -204,24 +207,38 @@
 
     var $overlay = $('#overlay'),
         origin;
-    
+
     $('#content').hide();
     $overlay.hide();
 
     // on close
     $overlay.on('click', function onClose() {
       setTimeout(function(){
-        $overlay.find('.selected-img').css({left:origin.left, top:origin.top, height: origin.height, width: origin.width});
+
+        $overlay.find('.selected-img').css({
+
+          left:origin.left,
+          top:origin.top,
+          height: origin.height,
+          width: origin.width
+
+        });
+
         origin = null;
+
       }, 200);
+      
       $('#content').fadeOut('fast');
+      
       setTimeout(function(){
 
         // remove the blur filter
         $('#container').css('-webkit-filter', 'none');
 
         $overlay.fadeOut('fast').find('.selected-img').remove();
+
       }, 850);
+
     });
 
 
@@ -235,7 +252,7 @@
 
       var pos = $el.offset();
 
-      // store info about when the tile belongs so it can be replaced onclose
+      // store info about when the tile belongs so it can be replaced on close
       origin = {
         left: pos.left,
         top: pos.top,
@@ -243,36 +260,46 @@
         width: $el.outerWidth()
       };
 
-
       // make the clone appear in the same place as the origin tile
       clone.addClass('selected-img').css({left:origin.left, top:origin.top, height: origin.height, width: origin.width});
       
       $overlay.show();
       
-      // apply the blur filter
-      $('#container').css('-webkit-filter', 'blur(12px)');
+      // apply the blur & saturate filters
+      $('#container').css('-webkit-filter', 'blur(10px) saturate(0.35)');
       
-      console.log('Aspect ratio', origin.height / origin.width);
-      console.log('Available space', $overlay.height());
-
-      var availableWidth = ($overlay.width() / 2);
+      var topMarginPercent = 12;
+      var overlayWidth = $overlay.width();
+      var availableWidth = (overlayWidth / 2);
       var availableHeight = $overlay.height();
+      // minus the top margin
+      availableHeight = availableHeight - (availableHeight * (topMarginPercent / 100)) - 25;
+      var aspectRatio = origin.width / origin.height;
+      var likelyHeight = availableWidth / aspectRatio;
+      var likelyWidth = availableWidth;
+      var isPortrait = likelyHeight > availableHeight;
+
+      if (isPortrait) {
+        likelyWidth = availableHeight * aspectRatio;
+        likelyHeight = availableHeight;
+      }
 
       var target = {
-        top:'12%',
-        left: '0%',
-        width: availableWidth + 'px',
-        height: (((origin.width / origin.height) * $overlay.width()) / 2) + 'px'
+        top: topMarginPercent + '%',
+        left: ((availableWidth - likelyWidth) / 2),
+        width: likelyWidth,
+        height: likelyHeight
       };
       
       clone.appendTo($overlay[0]);
 
       // animate the cloned image to its new position in the detail view.
-      setTimeout( function() { clone.css({height: target.height, width: target.width, top: target.top, left: target.left}); }, 10);
+      setTimeout( function() { clone.css({height: target.height  + 'px', width: target.width  + 'px', top: target.top, left: target.left  + 'px'}); }, 10);
 
       // set up a short wait to display the article detail view
       setTimeout(function(){
-        $('#content').fadeIn('fast');
+        $('#content').css({top: target.top, left : target.left + target.width + (overlayWidth * 0.007) + 'px'}).fadeIn('fast');
+        clone.find('img').css({'box-shadow': '0px 0px 10px black'})
       }, 500);
 
       // populate the detail view with the article data
