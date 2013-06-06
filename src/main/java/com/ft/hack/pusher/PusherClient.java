@@ -32,7 +32,7 @@ public class PusherClient {
 
             LOGGER.debug("Will push json :: " + json);
 
-            pusherCh.pushEvent("click", json);
+            pusherCh.pushEvent("hover", json);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error(e);

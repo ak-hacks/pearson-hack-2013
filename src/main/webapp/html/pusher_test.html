@@ -18,7 +18,7 @@
 
         var pusher = new Pusher('f17a457dad3779afdba1');
         var channel = pusher.subscribe('leap_pearson');
-        channel.bind('click', function(data) {
+        channel.bind('hover', function(data) {
             alert(data);
             //$('h2').html(data);
         });
