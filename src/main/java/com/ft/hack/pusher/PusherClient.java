@@ -32,7 +32,7 @@ public class PusherClient {
 
             LOGGER.debug("Will push json :: " + json);
 
-            //pusherCh.pushEvent("leap_pearson_event", data);
+            pusherCh.pushEvent("click", json);
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error(e);
