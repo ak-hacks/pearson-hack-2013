@@ -7,6 +7,10 @@ test( "hello test", function() {
 
     ui.hover(testData.hover1);
 
-    equal(ui.xpos, 344, "x pos is 344");
-    equal(ui.ypos, 544, "y pos is 544");
+    //have to wait for animation to complete
+    setTimeout(500, function () {
+        equal(ui.xpos, 344, "x pos is 344");
+        equal(ui.ypos, 544, "y pos is 544");
+    });
+
 });
