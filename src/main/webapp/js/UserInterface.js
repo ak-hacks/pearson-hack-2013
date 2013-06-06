@@ -1,12 +1,15 @@
 /*global $*/
 //react to the events
 var UserInterface = function () {
-    var xposition = 0,
-        yposition = 0;
+    var animationDelay = 500,
+        xposition = 0,
+        yposition = 0,
+        halfWindowWidth = Math.floor($(window).width() / 2 ),
+        halfWindowHeight = Math.floor($(window).height() / 2);
 
-    $('body').append('<img src="/img/blob.png" alt="location indicator">');
+    $('body').append('<img src="/img/blob.png" alt="location indicator" id="marker-blob">');
 
-    function swipe(direction) {
+    function swipe(segment, direction) {
 
     }
 
@@ -21,10 +24,12 @@ var UserInterface = function () {
     }
 
     function updatePage() {
+        var newX = halfWindowWidth + xposition,
+            newY = halfWindowHeight + yposition;
         $("#marker-blob").animate({
-            left: "344",
-            top: "544"
-        }, 500);
+            left: newX,
+            top: newY
+        }, animationDelay);
     }
 
     return {
