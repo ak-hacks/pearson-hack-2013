@@ -16,7 +16,7 @@ channel.bind('swipe', function(data) {
 
 channel.bind('open', function(data) {
     console.log('open received', data);
-    ui.open(data[0], data[1]);
+    ui.open(data.x, data.y);
 });
 
 channel.bind('close', function() {
