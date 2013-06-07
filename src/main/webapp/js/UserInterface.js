@@ -7,7 +7,7 @@ var UserInterface = function (yOffsetVal, xfactorVal) {
         yposition = 0,
         halfWindowWidth = Math.floor($(window).width() / 2 );
 
-    $('body').append('<img src="/img/blob.png" alt="location indicator" id="marker-blob">');
+    $('body').append('<img src="/leap-pearson/img/blob.png" alt="location indicator" id="marker-blob">');
 
     function swipe(segment, direction) {
         var section = $("#ribbon-" + segment),

@@ -23,49 +23,49 @@ function sendFile(res, path, expires) {
     }
 }
 
-expr.get('/css/:file', function (req, res){
+expr.get('/leap-pearson/css/:file', function (req, res){
     var path, expires;
     path = 'src/main/webapp/css/' + req.params.file;
     expires = 30;
     sendFile(res, path, expires);
 });
 
-expr.get('/img/content/:file', function (req, res){
+expr.get('/leap-pearson/img/content/:file', function (req, res){
     var path, expires;
     path = 'src/main/webapp/img/content/' + req.params.file;
     expires = 30;
     sendFile(res, path, expires);
 });
 
-expr.get('/img/:file', function (req, res){
+expr.get('/leap-pearson/img/:file', function (req, res){
     var path, expires;
     path = 'src/main/webapp/img/' + req.params.file;
     expires = 30;
     sendFile(res, path, expires);
 });
 
-expr.get('/js/tests/:file', function (req, res){
+expr.get('/leap-pearson/js/tests/:file', function (req, res){
     var path, expires;
     path = 'src/main/webapp/js/tests/' + req.params.file;
     expires = 30;
     sendFile(res, path, expires);
 });
 
-expr.get('/js/:file', function (req, res){
+expr.get('/leap-pearson/js/:file', function (req, res){
     var path, expires;
     path = 'src/main/webapp/js/' + req.params.file;
     expires = 30;
     sendFile(res, path, expires);
 });
 
-expr.get('/index.html', function (req, res){
+expr.get('/leap-pearson/index.html', function (req, res){
     var path, expires;
     path = 'src/main/webapp/index.html';
     expires = 30;
     sendFile(res, path, expires);
 });
 
-expr.get('/:file', function (req, res){
+expr.get('/leap-pearson/:file', function (req, res){
     var path, expires;
     path = 'src/main/webapp/html/' + req.params.file;
     expires = 30;
