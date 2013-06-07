@@ -6,10 +6,15 @@ var UserInterface = function (xfactorVal, yfactorVal) {
         xposition = 0,
         yposition = 0,
         halfWindowWidth = Math.floor($(window).width() / 2 ),
+        halfWindowHeight = Math.floor($(window).height() / 2),
         elemOpen = false,
-        openEventInProgress = false;
+        openEventInProgress = false,
+        imgStr = '<img src="/leap-pearson/img/blob3.png" ' +
+                 'alt="location indicator" ' +
+                 'id="marker-blob" ' +
+                 'style="bottom:' + halfWindowHeight + 'px;left:' + halfWindowWidth + 'px">';
 
-    $('body').append('<img src="/leap-pearson/img/blob.png" alt="location indicator" id="marker-blob">');
+    $('body').append(imgStr);
 
     function swipe(segment, direction) {
         var section = $("#ribbon-" + segment),
