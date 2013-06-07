@@ -19,7 +19,7 @@ public class PusherClient {
     private static final Logger LOGGER = Logger.getLogger(PusherClient.class);
     private static final String HOVER_EVENT = "hover";
     private static final String SWIPE_EVENT = "swipe";
-    private static final String SELECT_EVENT = "select";
+    private static final String SELECT_EVENT = "open";
     private static final String CLOSE_EVENT = "close";
 
     private static final String CHANNEL_NAME = "leap_pearson";
@@ -27,7 +27,7 @@ public class PusherClient {
     private static final String KEY = "f17a457dad3779afdba1";
     private static final String SECRET = "62794722cbca8b8f1ef5";
 
-    private static final boolean pusherEnabled = false;
+    private static final boolean pusherEnabled = true;
 
     private static PusherChannel pusherCh = new PusherChannel(CHANNEL_NAME, APP_ID, KEY, SECRET,
             new HttpClientPusherTransport());
@@ -80,7 +80,7 @@ public class PusherClient {
     private static void pushSelect(Map<String, String> data) {
         try {
             Map<String, String> dataToPush = new HashMap<String, String>();
-            dataToPush.put("action","select");
+            dataToPush.put("action",SELECT_EVENT);
             dataToPush.put("x",data.get("x"));
             dataToPush.put("y",data.get("y"));
 
@@ -89,7 +89,7 @@ public class PusherClient {
 
             LOGGER.debug("Will push json :: " + json);
             if(pusherEnabled) {
-                pusherCh.pushEvent("select",json);
+                pusherCh.pushEvent(SELECT_EVENT,json);
             }
         }catch(Exception e) {
             e.printStackTrace();
@@ -100,14 +100,14 @@ public class PusherClient {
     private static void pushClose() {
         try {
             Map<String, String> dataToPush = new HashMap<String, String>();
-            dataToPush.put("action","close");
+            dataToPush.put("action",CLOSE_EVENT);
 
             Gson gson = new Gson();
             String json = gson.toJson(dataToPush);
 
             LOGGER.debug("Will push json :: " + json);
             if(pusherEnabled) {
-                pusherCh.pushEvent("select",json);
+                pusherCh.pushEvent(CLOSE_EVENT,json);
             }
         }catch(Exception e) {
             e.printStackTrace();

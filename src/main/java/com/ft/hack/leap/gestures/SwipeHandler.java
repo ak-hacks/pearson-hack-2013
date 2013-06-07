@@ -24,7 +24,7 @@ public class SwipeHandler {
 
         if(swipe.state().name().equalsIgnoreCase("STATE_STOP")) {
 
-            if(swipe.position().getY() < 180) {
+            if(swipe.position().getY() < 150) {
                 // bottom segment
                 segment = "bottom";
             }else {
