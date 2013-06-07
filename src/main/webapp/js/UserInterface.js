@@ -9,7 +9,7 @@ var UserInterface = function (xfactorVal, yfactorVal) {
         halfWindowHeight = Math.floor($(window).height() / 2),
         elemOpen = false,
         openEventInProgress = false,
-        imgStr = '<img src="/leap-pearson/img/blob3.png" ' +
+        imgStr = '<img src="/leap-pearson/img/blob.png" ' +
                  'alt="location indicator" ' +
                  'id="marker-blob" ' +
                  'style="bottom:' + halfWindowHeight + 'px;left:' + halfWindowWidth + 'px">';
