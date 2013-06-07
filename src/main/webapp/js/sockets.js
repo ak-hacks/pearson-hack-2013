@@ -14,10 +14,16 @@ channel.bind('swipe', function(data) {
     ui.swipe(data.segment, data.direction);
 });
 
-channel.bind('select', function(data) {
-    console.log('select received', data);
-    ui.select(data[0], data[1]);
+channel.bind('open', function(data) {
+    console.log('open received', data);
+    ui.open(data[0], data[1]);
 });
+
+channel.bind('close', function() {
+    console.log('close received');
+    ui.close();
+});
+
 
 channel.bind('hover', function(data) {
     console.log('hover received', data);

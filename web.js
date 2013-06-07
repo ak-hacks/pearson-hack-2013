@@ -30,6 +30,13 @@ expr.get('/css/:file', function (req, res){
     sendFile(res, path, expires);
 });
 
+expr.get('/img/content/:file', function (req, res){
+    var path, expires;
+    path = 'src/main/webapp/img/content/' + req.params.file;
+    expires = 30;
+    sendFile(res, path, expires);
+});
+
 expr.get('/img/:file', function (req, res){
     var path, expires;
     path = 'src/main/webapp/img/' + req.params.file;

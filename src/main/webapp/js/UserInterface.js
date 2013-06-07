@@ -28,9 +28,13 @@ var UserInterface = function (yOffsetVal, xfactorVal) {
         }
     }
 
-    function select(xpos, ypos) {
+    function open(xpos, ypos) {
         var elem = document.elementByPoint(xpos, ypos);
         elem.click();
+    }
+
+    function close() {
+
     }
 
     function hover(xpos, ypos) {
@@ -50,7 +54,8 @@ var UserInterface = function (yOffsetVal, xfactorVal) {
 
     return {
         hover: hover,
-        select: select,
+        open: open,
+        close: close,
         swipe: swipe,
         xpos: xposition,
         ypos: yposition
