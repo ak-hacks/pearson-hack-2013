@@ -14,7 +14,7 @@ public class FingersHandler {
 
     private static final Logger LOGGER = Logger.getLogger(FingersHandler.class);
     private static final String HOVER_EVENT = "hover";
-    private static final int MOVEMENT_THRESHOLD = 20;
+    private static final int MOVEMENT_THRESHOLD = 10;
     private static int x = -999;
     private static int y = -999;
 
