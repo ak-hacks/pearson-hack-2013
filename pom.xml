@@ -85,4 +85,8 @@
             <version>${gson.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>leap-pearson</finalName>
+    </build>
 </project>
